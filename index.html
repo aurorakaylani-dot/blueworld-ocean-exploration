@@ -267,47 +267,30 @@
     .fish-5 { top: 15%; animation-delay: -9s; }
     .fish-6 { top: 45%; animation-delay: -11s; }
 
-    /* =============== SECTION HOME =============== */
-   section#home {
-  display: flex;
-  width: 100%;              /* jangan 100vw, supaya tidak bikin scroll samping */
-  min-height: 100vh;        /* lebih aman pakai min-height */
-  position: relative;
-  padding-top: 60px;        /* ganti margin-top jadi padding supaya tidak “dorong” lebar */
-  overflow: hidden;
-  background: linear-gradient(to bottom, #1ca7ec 0%, #004e92 50%, #00152a 100%);
-  z-index: 2;
-}
-
-   .half {
-  flex: 1;                 /* biar fleksibel, tidak memaksa 50% yang kadang lewat layar */
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
-  filter: brightness(0.8) saturate(1.1);
-}
-    .left {
+    /* =============== SECTION HOME (DIBENARKAN) =============== */
+    section#home {
+      position: relative;
+      margin-top: 60px;          /* supaya tidak ketabrak navbar */
+      width: 100%;
+      height: calc(100vh - 60px);/* full layar di bawah navbar */
+      overflow: hidden;
       background-image: url('Underwater Phone Wallpaper Images.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      z-index: 2;
     }
 
-    .right {
-      background-image: url('Dasar laut dalam.jpg');
-    }
-
-    .half::after {
+    /* Lapisan gradasi di atas foto supaya teks jelas */
+    #home::before {
       content: "";
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at top, rgba(0, 191, 255, 0.25), rgba(0, 0, 50, 0.7));
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0, 191, 255, 0.3), rgba(0, 0, 40, 0.8));
+      z-index: 1;
     }
 
-   
-    /* ======= KOTAK "KEINDAHAN LAUT NUSANTARA" (DIPERKOKOH & ANIMASI) ======= */
+    /* ======= KOTAK "KEINDAHAN LAUT NUSANTARA" ======= */
     .home-content {
       position: absolute;
       top: 50%;
@@ -319,7 +302,6 @@
       max-width: 650px;
       padding: 24px 26px 26px;
 
-      /* glassmorphism + glow */
       background: radial-gradient(circle at top left,
                   rgba(0, 215, 255, 0.35),
                   rgba(0, 18, 45, 0.9));
@@ -330,7 +312,6 @@
         0 18px 35px rgba(0,0,0,0.75),
         0 0 20px rgba(0, 220, 255, 0.55);
 
-      /* animasi hidup pelan */
       opacity: 0;
       animation:
         homeFadeUp 1.6s ease forwards,
@@ -340,7 +321,6 @@
       position: relative;
     }
 
-    /* garis cahaya lewat (light sweep) */
     .home-content::before {
       content: "";
       position: absolute;
@@ -957,43 +937,6 @@
       filter: brightness(1.05);
     }
 
-    /* TEMA TERANG (kalau nanti mau dipakai) */
-    body.light-theme {
-      background: radial-gradient(circle at top, #e9f6ff 0%, #cbe6ff 40%, #ffffff 100%);
-      color: #10263b;
-    }
-
-    body.light-theme #pemandangan,
-    body.light-theme #save-ocean {
-      background: #e8f4ff;
-      color: #10263b;
-    }
-
-    body.light-theme .navbar {
-      background: linear-gradient(90deg, #ffffff, #dff1ff);
-    }
-
-    body.light-theme .ocean-card,
-    body.light-theme .issue-card {
-      background: rgba(255,255,255,0.9);
-      color: #10263b;
-      border-color: rgba(0,0,0,0.08);
-    }
-
-    body.light-theme .ocean-modal {
-      background: radial-gradient(circle at top, #ffffff 0%, #e1f1ff 70%);
-      color: #10263b;
-      border-color: rgba(0,0,0,0.06);
-    }
-
-    body.light-theme .ocean-modal-highlight {
-      color: #1b3954;
-    }
-
-    body.light-theme .ocean-modal-overlay {
-      background: rgba(0, 17, 40, 0.6);
-    }
-
     /* ========= FOOTER & GELEMBUNG ========= */
     .footer {
       position: relative;
@@ -1245,30 +1188,6 @@
       margin-right: 4px;
     }
 
-    body.light-theme .footer {
-      background: linear-gradient(to bottom, #e3f4ff, #f6fbff);
-      color: #13283a;
-    }
-
-    body.light-theme .footer-links a {
-      color: #27425a;
-    }
-
-    body.light-theme .footer-social-icons a {
-      border-color: rgba(0,0,0,0.25);
-      color: #173048;
-    }
-
-    body.light-theme .footer-input-wrap input {
-      background: rgba(255,255,255,0.9);
-      color: #10263b;
-      border-color: rgba(0,0,0,0.16);
-    }
-
-    body.light-theme .footer-bottom {
-      border-top-color: rgba(0,0,0,0.12);
-    }
-
     /* ============== RESPONSIVE ============== */
     @media (max-width: 992px) {
       .ocean-grid {
@@ -1279,21 +1198,10 @@
         grid-template-columns: 1fr;
       }
     }
-@media (max-width: 768px) {
-  section#home {
-    flex-direction: column;
-    height: auto;          /* biar tinggi menyesuaikan konten di layar kecil */
-    min-height: calc(100vh - 60px);
-  }
 
-  .half {
-    width: 100%;
-    height: 220px;         /* tinggi tiap gambar di HP */
-  }
-
-
-      section#home::after {
-        display: none;
+    @media (max-width: 768px) {
+      section#home {
+        height: calc(100vh - 60px);
       }
 
       .home-content {
@@ -1464,9 +1372,6 @@
 
   <!-- ================= SECTION HOME ================= -->
   <section id="home">
-    <div class="half left"></div>
-    <div class="half right"></div>
-
     <div class="home-content">
       <span class="home-highlight">DEEP BLUE NUSANTARA</span>
       <h1>Keindahan Laut Nusantara</h1>
@@ -1650,6 +1555,7 @@
       kita bisa membantu menyembuhkan lautan untuk generasi yang akan datang.
     </p>
 
+    <!-- POPUP / MODAL MOTIVASI -->
     <div class="ocean-modal-overlay" id="oceanModal">
       <div class="ocean-modal">
         <h3>Terima kasih sudah peduli laut 🌊</h3>
@@ -1798,7 +1704,7 @@
         </p>
 
         <div class="footer-madeby-wrapper">
-          <img src="logo tabs.png" alt="Logo Sekolah"
+          <img src="logo-sekolah.png" alt="Logo Sekolah"
             style="width:32px; height:32px; border-radius:50%; object-fit:cover;
             border:1px solid rgba(255,255,255,0.7);">
           <div class="footer-madeby-text">
@@ -1828,10 +1734,10 @@
         </p>
 
         <div class="footer-social-icons" id="footer">
-          <a href="https://www.instagram.com/kaaa09.astrophile" target="_blank" aria-label="Instagram">
+          <a href="https://www.instagram.com/" target="_blank" aria-label="Instagram">
             <i class="fa-brands fa-instagram"></i>
           </a>
-          <a href="https://wa.me/6281288533844" target="_blank" aria-label="WhatsApp">
+          <a href="https://wa.me/621288533844" target="_blank" aria-label="WhatsApp">
             <i class="fa-brands fa-whatsapp"></i>
           </a>
           <a href="https://youtu.be/dEnplvG7jEE?si=hRiSKbs63zU7U3PR" target="_blank" aria-label="YouTube">

@@ -3,160 +3,686 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Test Hamburger</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <title>Laut Dalam - BLUEWORLD</title>
+
+  <!-- Font Awesome (ikon) -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
   <style>
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     body {
+      background: #001b2e;
+      color: #ffffff;
       min-height: 100vh;
-      background: #003b66;
-      color: #fff;
-      padding-top: 60px;
     }
 
-    /* NAVBAR */
-    .navbar {
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ================= NAVBAR ================= */
+    header {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      padding: 10px 20px;
-      background: linear-gradient(90deg, #0077be, #00a8e8);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
+      right: 0;
+      z-index: 1000;
+      background: linear-gradient(90deg, #0077c8, #00aee0);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
     }
 
-    .logo {
+    .navbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-circle {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #ffffff;
+    }
+
+    .logo-circle img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .logo-text span:first-child {
+      font-size: 18px;
       font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .logo-text span:last-child {
+      font-size: 10px;
       letter-spacing: 2px;
+      text-transform: uppercase;
     }
 
     .nav-links {
       display: flex;
-      gap: 15px;
-    }
-
-    .nav-links a {
-      color: #fff;
-      text-decoration: none;
+      align-items: center;
+      gap: 25px;
       font-size: 14px;
     }
 
-    /* HAMBURGER */
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.7);
-      background: rgba(0, 50, 90, 0.6);
-      cursor: pointer;
-      gap: 5px;
+    .nav-links a {
+      position: relative;
+      font-weight: 500;
+      padding-bottom: 2px;
     }
 
-    .hamburger span {
-      width: 18px;
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -3px;
+      width: 0%;
       height: 2px;
+      background: #ffffff;
       border-radius: 999px;
-      background: #fff;
-      transition: transform 0.2s ease, opacity 0.2s ease;
+      transition: width 0.25s ease;
     }
 
-    .hamburger.active span:nth-child(1) {
-      transform: translateY(3.5px) rotate(45deg);
-    }
-    .hamburger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .hamburger.active span:nth-child(3) {
-      transform: translateY(-3.5px) rotate(-45deg);
+    .nav-links a:hover::after {
+      width: 100%;
     }
 
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
+    /* ============== SECTION GLOBAL ============== */
+    section {
+      width: 100%;
+      min-height: 100vh;
+      padding: 80px 20px 40px; /* 80px supaya tidak ketutup navbar */
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    /* ================= HOME ================= */
+    #home {
+      position: relative;
+      height: calc(100vh - 0px);
+      padding-top: 60px; /* space di bawah navbar */
+      display: flex;
+      overflow: hidden;
+    }
+
+    .home-left,
+    .home-right {
+      flex: 1;
+      height: 100%;
+    }
+
+    .home-left img,
+    .home-right img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.85);
+    }
+
+    .home-overlay {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at top, rgba(0, 80, 160, 0.25), transparent);
+      pointer-events: none;
+    }
+
+    .home-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      color: #ffffff;
+      padding: 20px 40px;
+      background: linear-gradient(135deg, rgba(0, 0, 0, 0.45), rgba(0, 80, 150, 0.65));
+      border-radius: 18px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+      max-width: 520px;
+    }
+
+    .home-text h1 {
+      font-size: 40px;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+      text-shadow: 0 5px 15px #000;
+    }
+
+    .home-text p {
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .home-quote {
+      font-style: italic;
+      font-size: 13px;
+      opacity: 0.9;
+    }
+
+    /* ================= ABOUT ================= */
+    #about {
+      background: radial-gradient(circle at top, #005f99, #000f1f);
+    }
+
+    #about .section-inner {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+
+    #about h2 {
+      font-size: 30px;
+      margin-bottom: 12px;
+      letter-spacing: 1px;
+    }
+
+    #about p {
+      font-size: 14px;
+      line-height: 1.7;
+      opacity: 0.92;
+      text-align: justify;
+    }
+
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.35);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 10px;
+    }
+
+    .about-badge i {
+      font-size: 12px;
+    }
+
+    .about-card {
+      background: linear-gradient(150deg, rgba(0, 0, 0, 0.65), rgba(0, 100, 170, 0.85));
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7);
+    }
+
+    .about-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .about-card h3 i {
+      font-size: 18px;
+    }
+
+    .about-card ul {
+      margin-top: 8px;
+      padding-left: 18px;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    /* ================= VIEW (GALERI LAUT) ================= */
+    #view {
+      background: linear-gradient(180deg, #001b33, #00060c);
+    }
+
+    #view h2 {
+      font-size: 28px;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    #view p.subtitle {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.85;
+      margin-bottom: 24px;
+    }
+
+    .view-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .view-card {
+      border-radius: 18px;
+      overflow: hidden;
+      background: #001325;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.7);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .view-card img {
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .view-card-body {
+      padding: 12px 14px 14px;
+    }
+
+    .view-card-body h3 {
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .view-card-body p {
+      font-size: 12px;
+      opacity: 0.9;
+      line-height: 1.5;
+    }
+
+    /* ================= SAVE OCEAN ================= */
+    #save-ocean {
+      background: radial-gradient(circle at top, #006494, #000814);
+    }
+
+    #save-ocean h2 {
+      font-size: 28px;
+      text-align: center;
+      margin-bottom: 6px;
+      letter-spacing: 1px;
+    }
+
+    #save-ocean p.subtitle {
+      text-align: center;
+      font-size: 13px;
+      opacity: 0.9;
+      margin-bottom: 22px;
+    }
+
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .problem-card {
+      background: rgba(0, 0, 0, 0.55);
+      border-radius: 18px;
+      padding: 14px 16px 16px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(0, 180, 255, 0.2);
+    }
+
+    .problem-card h3 {
+      font-size: 15px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .problem-card h3 i {
+      font-size: 16px;
+    }
+
+    .problem-card p {
+      font-size: 12px;
+      line-height: 1.6;
+      opacity: 0.95;
+      text-align: justify;
+    }
+
+    .actions-list {
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 16px;
+      padding: 14px 16px;
+      border: 1px solid rgba(0, 200, 255, 0.3);
+    }
+
+    .actions-list h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .actions-list h3 i {
+      font-size: 16px;
+    }
+
+    .actions-list ul {
+      font-size: 13px;
+      padding-left: 17px;
+      line-height: 1.7;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #000814;
+      padding: 18px 20px;
+      border-top: 1px solid #003049;
+      margin-top: 0;
+    }
+
+    footer .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      font-size: 12px;
+      color: #d0e6ff;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 10px;
+      font-size: 16px;
+    }
+
+    .footer-social a {
+      transition: transform 0.2s ease;
+    }
+
+    .footer-social a:hover {
+      transform: translateY(-2px) scale(1.1);
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 900px) {
       .nav-links {
-        position: fixed;
-        top: 60px;
-        right: 10px;
-        background: rgba(0, 30, 60, 0.95);
-        padding: 12px 16px;
-        border-radius: 12px;
+        gap: 16px;
+        font-size: 13px;
+      }
+
+      #about .section-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .view-grid,
+      .problems-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .home-text h1 {
+        font-size: 30px;
+      }
+
+      .home-text {
+        padding: 16px 24px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .navbar {
+        padding-inline: 14px;
+      }
+
+      .nav-links {
+        display: none; /* simpel: sembunyikan di HP biar gak numpuk */
+      }
+
+      #home {
         flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(-10px);
-        transition: opacity 0.2s ease, transform 0.2s ease;
+        height: auto;
       }
 
-      .nav-links.show {
-        opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
+      .home-left,
+      .home-right {
+        height: 45vh;
       }
 
-      .hamburger {
-        display: flex; /* PENTING: hamburger muncul hanya di lebar <= 768px */
+      .home-text {
+        position: static;
+        transform: none;
+        margin: 10px auto 16px;
+      }
+
+      .view-grid,
+      .problems-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer .footer-inner {
+        flex-direction: column;
+        text-align: center;
       }
     }
   </style>
 </head>
 <body>
+
+  <!-- =============== NAVBAR =============== -->
   <header>
     <div class="navbar">
-      <div class="logo">BLUEWORLD</div>
+      <div class="logo-area">
+        <div class="logo-circle">
+          <!-- Ganti logo.png dengan logo kamu -->
+          <img src="logo.png" alt="Logo Blueworld">
+        </div>
+        <div class="logo-text">
+          <span>BLUEWORLD</span>
+          <span>OCEAN EXPLORATION</span>
+        </div>
+      </div>
 
-      <div class="nav-links" id="navLinks">
+      <nav class="nav-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
         <a href="#view">View</a>
-        <a href="#save">Save Ocean</a>
-      </div>
-
-      <button class="hamburger" id="hamburgerBtn" aria-label="Menu">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+        <a href="#save-ocean">Save Ocean</a>
+        <a href="#footer">Footer</a>
+      </nav>
     </div>
   </header>
 
-  <main style="padding: 20px;">
-    <h1 id="home">Test Hamburger</h1>
-    <p>Perkecil jendela browser sampai sempit (kurang dari 768px) atau buka di HP.</p>
-    <p>Kalau benar, tombol hamburger (kotak kecil dengan 3 garis) akan muncul di kanan atas.</p>
-  </main>
+  <!-- =============== HOME =============== -->
+  <section id="home">
+    <div class="home-left">
+      <!-- ganti laut1.jpg -->
+      <img src="laut1.jpg" alt="Pemandangan bawah laut">
+    </div>
+    <div class="home-right">
+      <!-- ganti laut2.jpg -->
+      <img src="laut2.jpg" alt="Terumbu karang dan ikan">
+    </div>
 
-  <script>
-    const hamburgerBtn = document.getElementById('hamburgerBtn');
-    const navLinks = document.getElementById('navLinks');
+    <div class="home-overlay"></div>
 
-    hamburgerBtn.addEventListener('click', () => {
-      navLinks.classList.toggle('show');
-      hamburgerBtn.classList.toggle('active');
-    });
+    <div class="home-text">
+      <h1>KEINDAHAN LAUT DALAM</h1>
+      <p>
+        Ribuan pulau, jutaan spesies laut, dan dunia bawah air Indonesia yang selalu
+        menyimpan keajaiban. Dari terumbu karang yang berwarna-warni hingga ikan-ikan
+        yang menari di antara arus.
+      </p>
+      <p class="home-quote">
+        “Once you fall in love with the ocean, it will never leave your heart.”
+      </p>
+    </div>
+  </section>
 
-    navLinks.querySelectorAll('a').forEach(link => {
-      link.addEventListener('click', () => {
-        if (window.innerWidth <= 768) {
-          navLinks.classList.remove('show');
-          hamburgerBtn.classList.remove('active');
-        }
-      });
-    });
-  </script>
+  <!-- =============== ABOUT =============== -->
+  <section id="about">
+    <div class="section-inner">
+      <div>
+        <div class="about-badge">
+          <i class="fa-solid fa-water"></i> Tentang Laut Dalam Indonesia
+        </div>
+        <h2>Menyelami Birunya Nusantara</h2>
+        <p>
+          Indonesia dikenal sebagai negara dengan keanekaragaman hayati laut terbesar
+          di dunia. Laut kita menjadi rumah bagi terumbu karang, ikan tropis,
+          mamalia laut, hingga organisme mikroskopis yang semuanya saling terhubung.
+          Laut bukan hanya pemandangan indah, tetapi juga sumber pangan, jalur
+          transportasi, penopang iklim, dan kehidupan jutaan masyarakat pesisir.
+        </p>
+        <br>
+        <p>
+          Menjaga laut berarti menjaga masa depan. Melalui BLUEWORLD, kita diajak
+          untuk mengenal, mengagumi, dan pada akhirnya ikut melindungi kekayaan
+          laut Indonesia agar tetap lestari untuk generasi berikutnya.
+        </p>
+      </div>
+
+      <div class="about-card">
+        <h3><i class="fa-solid fa-starfish"></i> Fakta Singkat Laut Indonesia</h3>
+        <ul>
+          <li>Memiliki lebih dari 17.000 pulau dengan garis pantai terpanjang kedua di dunia.</li>
+          <li>Masuk dalam wilayah <em>Coral Triangle</em>, pusat keanekaragaman terumbu karang dunia.</li>
+          <li>Menjadi habitat bagi ratusan spesies terumbu karang dan ribuan jenis ikan.</li>
+          <li>Berperan penting dalam menyerap karbon dan mengatur suhu bumi.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== VIEW =============== -->
+  <section id="view">
+    <div class="section-inner">
+      <h2>Pemandangan Bawah Laut</h2>
+      <p class="subtitle">
+        Beberapa contoh keindahan laut Indonesia yang memukau.
+      </p>
+
+      <div class="view-grid">
+        <div class="view-card">
+          <img src="view1.jpg" alt="Terumbu karang berwarna">
+          <div class="view-card-body">
+            <h3>Terumbu Karang Berwarna</h3>
+            <p>
+              Terumbu karang yang sehat memiliki warna-warni cerah dan menjadi
+              rumah bagi banyak ikan kecil dan biota laut lainnya.
+            </p>
+          </div>
+        </div>
+
+        <div class="view-card">
+          <img src="view2.jpg" alt="Ikan tropis">
+          <div class="view-card-body">
+            <h3>Ikan Tropis</h3>
+            <p>
+              Air yang jernih dan hangat membuat berbagai jenis ikan tropis
+              betah hidup di perairan Indonesia.
+            </p>
+          </div>
+        </div>
+
+        <div class="view-card">
+          <img src="view3.jpg" alt="Penyelam di laut dalam">
+          <div class="view-card-body">
+            <h3>Menyelam di Laut Dalam</h3>
+            <p>
+              Aktivitas menyelam memungkinkan kita melihat langsung keindahan
+              dunia bawah laut yang sulit digambarkan dengan kata-kata.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== SAVE OCEAN =============== -->
+  <section id="save-ocean">
+    <div class="section-inner">
+      <h2>Save The Ocean</h2>
+      <p class="subtitle">
+        Laut Indonesia sedang menghadapi berbagai tantangan. Kita semua bisa
+        berperan untuk menjaganya.
+      </p>
+
+      <div class="problems-grid">
+        <div class="problem-card">
+          <h3><i class="fa-solid fa-trash"></i> Pencemaran Sampah Plastik</h3>
+          <p>
+            Sampah plastik yang dibuang ke sungai dan laut dapat membunuh hewan laut,
+            merusak terumbu karang, dan bahkan masuk ke rantai makanan manusia dalam
+            bentuk mikroplastik.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <h3><i class="fa-solid fa-fish"></i> Penangkapan Ikan Berlebihan</h3>
+          <p>
+            Praktik penangkapan ikan yang tidak berkelanjutan menyebabkan populasi ikan
+            menurun drastis. Jika dibiarkan, nelayan justru akan kesulitan mencari ikan
+            di masa depan.
+          </p>
+        </div>
+
+        <div class="problem-card">
+          <h3><i class="fa-solid fa-temperature-high"></i> Perubahan Iklim</h3>
+          <p>
+            Pemanasan global membuat suhu laut meningkat dan menyebabkan
+            pemutihan terumbu karang. Ekosistem laut menjadi rentan dan banyak
+            spesies yang kehilangan habitatnya.
+          </p>
+        </div>
+      </div>
+
+      <div class="actions-list">
+        <h3><i class="fa-solid fa-hand-holding-heart"></i> Apa yang Bisa Kita Lakukan?</h3>
+        <ul>
+          <li>Mengurangi penggunaan plastik sekali pakai dan membawa tas serta botol minum sendiri.</li>
+          <li>Tidak membuang sampah ke sungai, selokan, atau pantai.</li>
+          <li>Mendukung produk laut yang berasal dari penangkapan berkelanjutan.</li>
+          <li>Ikut serta dalam kegiatan bersih pantai atau edukasi tentang lingkungan.</li>
+          <li>Menghemat listrik dan energi untuk mengurangi emisi gas rumah kaca.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== FOOTER =============== -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <span>© 2025 BLUEWORLD · Made with care for the ocean</span>
+      <div class="footer-social">
+        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="#"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
